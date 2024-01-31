@@ -101,11 +101,21 @@ Feature: Ejercicios clase 4
     * print response
     And match response.error == "Missing password"
 
+  Scenario: Caso8a - login no exitoso
+    Given url 'https://reqres.in'
+    And path '/api/register'
+    And request {"email" : "eve.holt@reqres.in"}
+    When method post
+    Then status 400
+    And match responseType == 'json'
+    * print response
+    And match response.error == "Missing password"
+
   Scenario: Caso9 - Delete
     * def id = 3
     Given url 'https://reqres.in'
     And path '/api/users/' + id
     When method delete
     Then status 204
-    * print response
+
 
