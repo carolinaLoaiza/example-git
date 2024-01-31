@@ -91,6 +91,21 @@ Feature: Ejercicios clase 4
     And match response.job == 'dog'
     And match response.updatedAt == "#notnull"
 
+  Scenario: Caso8 - login no exitoso
+    Given url 'https://reqres.in'
+    And path '/api/register'
+    And form field email = 'eve.holt@reqres.in'
+    When method post
+    Then status 400
+    And match responseType == 'json'
+    * print response
+    And match response.error == "Missing password"
 
-
+  Scenario: Caso9 - Delete
+    * def id = 3
+    Given url 'https://reqres.in'
+    And path '/api/users/' + id
+    When method delete
+    Then status 204
+    * print response
 
